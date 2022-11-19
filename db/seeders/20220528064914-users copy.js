@@ -10,6 +10,7 @@ const names = [
   "Brian",
   "Ranggawarsita",
   "Jayabaya",
+  "Midhat",
 ]
 
 module.exports = {

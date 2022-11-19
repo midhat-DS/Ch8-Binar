@@ -3,8 +3,8 @@ const { User, Role } = require("../models");
 const {
   WrongPasswordError,
   InsufficientAccessError,
+  RecordNotFoundError
 } = require("../errors");
-const RecordNotFoundError = require('../errors/RecordNotFoundError.js')
 
 
 const jwt = require("jsonwebtoken");
@@ -30,9 +30,9 @@ describe("AuthenticationController", () => {
   describe("#authorize", () => {
     it("should run next function .", async () => {
       const mockUser = {
-        id: 2,
-        name: "Midhat",
-        email: "Midhat@binar.co.id",
+        id: 16,
+        name: "midhat",
+        email: "midhat@binar.co.id",
         encryptedPassword:
           "15f82874cfeb70bb80b9c7e82adbf68a",
         roleId: 1,
@@ -64,11 +64,11 @@ describe("AuthenticationController", () => {
 
     it("should res.status(401) with InsufficientAccessError ", async () => {
       const mockUser = {
-        id: 2,
-        name: "Midhat",
-        email: "Midhat@binar.co.id",
+        id: 16,
+        name: "midhat",
+        email: "midhat@binar.co.id",
         encryptedPassword:
-          "$2a$10$a/Nv0ULUmsfDUDbgf7991uENTqBMEA0LbcUcQ3U4xElPZumsV.Kmy",
+          "$2a$10$eJA5VrcStxv4nci3j4ZNnOdIWuQz1cWRESxatG3zPIrHHYFkSDIwu",
         roleId: 1,
       };
       const mockRole = { id: 1, name: "COSTUMER" };
@@ -110,11 +110,11 @@ describe("AuthenticationController", () => {
     });
     it("should res.status(401) with error token wrong.", async () => {
       const mockUser = {
-        id: 2,
-        name: "Midhat",
-        email: "Midhat@binar.co.id",
+        id: 16,
+        name: "midhat",
+        email: "midhat@binar.co.id",
         encryptedPassword:
-          "$2a$10$a/Nv0ULUmsfDUDbgf7991uENTqBMEA0LbcUcQ3U4xElPZumsV.Kmy",
+          "$2a$10$eJA5VrcStxv4nci3j4ZNnOdIWuQz1cWRESxatG3zPIrHHYFkSDIwu",
         roleId: 1,
       };
       const mockRole = { id: 1, name: "COSTUMER" };
@@ -147,11 +147,11 @@ describe("AuthenticationController", () => {
   describe("handleLogin", () => {
     it("should return json staus 201 and token", async () => {
       const mockUser = new User({
-        id: 2,
-        name: "Midhat",
-        email: "Midhat@binar.co.id",
+        id: 16,
+        name: "midhat",
+        email: "midhat@binar.co.id",
         encryptedPassword:
-          "$2a$10$a/Nv0ULUmsfDUDbgf7991uENTqBMEA0LbcUcQ3U4xElPZumsV.Kmy",
+          "$2a$10$eJA5VrcStxv4nci3j4ZNnOdIWuQz1cWRESxatG3zPIrHHYFkSDIwu",
         roleId: 1,
       });
 
@@ -166,7 +166,7 @@ describe("AuthenticationController", () => {
 
       const mockRequest = {
         body: {
-          email: "Midhat@binar.co.id",
+          email: "midhat@binar.co.id",
           password: "123456",
         },
       };
@@ -210,7 +210,7 @@ describe("AuthenticationController", () => {
 
       const mockRequest = {
         body: {
-          email: "Midhat@binar.co.id",
+          email: "midhat@binar.co.id",
           password: "123456",
         },
       };
@@ -250,10 +250,10 @@ describe("AuthenticationController", () => {
     it("should return 401 status and an error message", async () => {
       const mockUser = new User({
         id: 5,
-        name: "Midhat",
-        email: "Midhat@binar.co.id",
+        name: "midhat",
+        email: "midhat@binar.co.id",
         encryptedPassword:
-          "$2a$10$a/Nv0ULUmsfDUDbgf7991uENTqBMEA0LbcUcQ3U4xElPZumsV.Kmy",
+          "$2a$10$eJA5VrcStxv4nci3j4ZNnOdIWuQz1cWRESxatG3zPIrHHYFkSDIwu",
         roleId: 1,
       });
 
@@ -267,7 +267,7 @@ describe("AuthenticationController", () => {
 
       const mockRequest = {
         body: {
-          email: "Midhat@binar.co.id",
+          email: "midhat@binar.co.id",
           password: "123",
         },
       };
@@ -311,11 +311,11 @@ describe("AuthenticationController", () => {
   describe("#handleRegister", () => {
     it("should return status 201  and token", async () => {
       const mockUser = new User({
-        id: 2,
-        name: "Midhat",
-        email: "Midhat@binar.co.id",
+        id: 16,
+        name: "midhat",
+        email: "midhat@binar.co.id",
         encryptedPassword:
-          "$2a$10$a/Nv0ULUmsfDUDbgf7991uENTqBMEA0LbcUcQ3U4xElPZumsV.Kmy",
+          "$2a$10$eJA5VrcStxv4nci3j4ZNnOdIWuQz1cWRESxatG3zPIrHHYFkSDIwu",
         roleId: 1,
       });
 
@@ -332,8 +332,8 @@ describe("AuthenticationController", () => {
 
       const mockRequest = {
         body: {
-          name: "Midhat",
-          email: "Midhat@binar.co.id",
+          name: "midhat",
+          email: "midhat@binar.co.id",
           password: "123456",
         },
       };
@@ -369,11 +369,11 @@ describe("AuthenticationController", () => {
   describe("handleGetUser", () => {
     it("should return 200 status and user", async () => {
       const mockUser = new User({
-        id: 5,
-        name: "Midhat",
-        email: "Midhat@binar.ac.id",
+        id: 16,
+        name: "midhat",
+        email: "midhat@binar.ac.id",
         encryptedPassword:
-          "$2a$10$a/Nv0ULUmsfDUDbgf7991uENTqBMEA0LbcUcQ3U4xElPZumsV.Kmy",
+          "$2a$10$eJA5VrcStxv4nci3j4ZNnOdIWuQz1cWRESxatG3zPIrHHYFkSDIwu",
         roleId: 1,
       });
 
@@ -420,10 +420,10 @@ describe("AuthenticationController", () => {
       "should res.status(404) with RecordNotFoundError " + "if user not found.",
       async () => {
         const mockUser = {
-          id: 2,
-          name: "Midhat",
-          email: "Midhat@binar.co.id",
-          encryptedPassword: "$2jakdbqudqiuy7981y9ge9g1dnqdiq9112g.dkah",
+          id: 16,
+          name: "midhat",
+          email: "midhat@binar.co.id",
+          encryptedPassword: "$2a$10$eJA5VrcStxv4nci3j4ZNnOdIWuQz1cWRESxatG3zPIrHHYFkSDIwu",
           roleId: 1,
         };
         const mockReq = {
@@ -449,10 +449,10 @@ describe("AuthenticationController", () => {
         });
 
         await controller.handleGetUser(mockReq, mockRes);
-        const expectErr = new RecordNotFoundError(mockUser.name);
+        const expectedError = new RecordNotFoundError(mockUser.name);
 
         expect(mockRes.status).toHaveBeenCalledWith(404);
-        expect(mockRes.json).toHaveBeenCalledWith(expectErr);
+        expect(mockRes.json).toHaveBeenCalledWith(expectedError);
       }
     );
   });
@@ -460,11 +460,11 @@ describe("AuthenticationController", () => {
   describe("#createTokenFromUser", () => {
     it("should return token", () => {
       const mockUser = new User({
-        id: 2,
-        name: "Midhat",
-        email: "Midhat@binar.co.id",
+        id: 16,
+        name: "midhat",
+        email: "midhat@binar.co.id",
         encryptedPassword:
-          "$2a$10$a/Nv0ULUmsfDUDbgf7991uENTqBMEA0LbcUcQ3U4xElPZumsV.Kmy",
+          "$2a$10$eJA5VrcStxv4nci3j4ZNnOdIWuQz1cWRESxatG3zPIrHHYFkSDIwu",
         roleId: 1,
       });
 
@@ -486,11 +486,11 @@ describe("AuthenticationController", () => {
   describe("#decodeToken", () => {
     it("should return user", () => {
       const mockUser = new User({
-        id: 2,
-        name: "Midhat",
-        email: "Midhat@binar.co.id",
+        id: 16,
+        name: "midhat",
+        email: "midhat@binar.co.id",
         encryptedPassword:
-          "$2a$10$a/Nv0ULUmsfDUDbgf7991uENTqBMEA0LbcUcQ3U4xElPZumsV.Kmy",
+          "$2a$10$eJA5VrcStxv4nci3j4ZNnOdIWuQz1cWRESxatG3zPIrHHYFkSDIwu",
         roleId: 1,
       });
 
@@ -514,11 +514,11 @@ describe("AuthenticationController", () => {
   describe("encryptPassword", () => {
     it("should return encrypted password", () => {
       const mockUser = new User({
-        id: 2,
-        name: "Midhat",
-        email: "Midhat@binar.co.id",
+        id: 16,
+        name: "midhat",
+        email: "midhat@binar.co.id",
         encryptedPassword:
-          "$2a$10$a/Nv0ULUmsfDUDbgf7991uENTqBMEA0LbcUcQ3U4xElPZumsV.Kmy",
+          "$2a$10$eJA5VrcStxv4nci3j4ZNnOdIWuQz1cWRESxatG3zPIrHHYFkSDIwu",
         roleId: 1,
       });
 
@@ -550,8 +550,8 @@ describe("AuthenticationController", () => {
     it("should return true", () => {
       const mockUser = new User({
         id: 2,
-        name: "Midhat",
-        email: "Midhat@binar.co.id",
+        name: "midhat",
+        email: "midhat@binar.co.id",
         encryptedPassword: "bagfigaofusofgcuag73b4cuyb7t83gb8",
         roleId: 1,
       });
